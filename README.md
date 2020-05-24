@@ -1,6 +1,13 @@
 <div align="center">
 <h1>@testing-library/which-query</h1>
-
+<a href="https://www.joypixels.com/profiles/emoji/flamingo">
+    <img
+    height="80"
+    width="80"
+    alt="flamingo"
+    src="https://raw.githubusercontent.com/testing-library/which-query/master/other/flamingo.png"
+  />
+</a>
 <p>🦩 Which query should I use?</p>
 </div>
 
@@ -95,11 +102,7 @@ Thanks goes to these people ([emoji key][emojis]):
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/testing-library/which-query/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/testing-library/which-query/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/testing-library/which-query/commits?author=kentcdodds" title="Tests">⚠️</a></td>
-  </tr>
-</table>
+
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
