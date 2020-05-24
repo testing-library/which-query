@@ -28,7 +28,7 @@ test("should recommend role when none present", () => {
   expect(getSuggestedQuery({ element })).not.toBeDefined();
 });
 
-test.skip("should recommend semantic role on element with role attribute", () => {
+test.skip("(probably won't implement this) should recommend semantic role on element with role attribute", () => {
   renderIntoDocument(`<a role="button">foo</a>`);
 
   screen.debug(screen.getByRole("link")); //🤔 maybe a gap in DTL here, but it appears that `link` is not returned when you use getByRole('link')
