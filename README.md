@@ -20,11 +20,16 @@
 
 ## The problem
 
-// TODO
+When using testing-library, some developers may not be aware of
+[which query to use](https://testing-library.com/docs/guide-which-query). As a
+result, folks will jump to using escape hatches like `*ByTestId` or
+`querySelector`.
 
 ## This solution
 
-// TODO
+This library aims to serve as the logic for finding a better query and giving
+hints/suggestions to developers during testing (opt in) as well as when using
+the [testing playground](http://testing-playground.com/).
 
 ## Table of Contents
 
@@ -58,7 +63,7 @@ npm install --save-dev @testing-library/which-query
 
 ## Inspiration
 
-// TODO
+[This tweet thread](https://twitter.com/benmonro/status/1264551204127780870?s=20)
 
 ## Other Solutions
 
