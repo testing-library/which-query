@@ -1,0 +1,46 @@
+{
+  "name": "@testing-library/which-query",
+  "version": "0.0.0-semantically-released",
+  "description": "🦩 Which query should I use?",
+  "main": "dist/index.js",
+  "keywords": [],
+  "author": "Ben Monro <ben.monro@gmail.com> (https://github.com/benmonro)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/testing-library/which-query"
+  },
+  "bugs": {
+    "url": "https://github.com/testing-library/which-query/issues"
+  },
+  "homepage": "https://github.com/testing-library/which-query#readme",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "setup": "npm install && npm run validate -s",
+    "test": "kcd-scripts test",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "validate": "kcd-scripts validate"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.6"
+  },
+  "devDependencies": {
+    "kcd-scripts": "^6.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ]
+}
