@@ -22,6 +22,15 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "kentcdodds",
+      "name": "Kent C. Dodds",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1500684?v=4",
+      "profile": "https://kentcdodds.com",
+      "contributions": [
+        "ideas"
+      ]
     }
   ]
 }
