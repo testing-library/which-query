@@ -9,16 +9,23 @@ test("should recommend role for element with text", () => {
   renderIntoDocument(`<button data-testid="foo">submit</button>`);
 
   const element = screen.getByTestId("foo"); //omg the hypocrisy
-  expect(getSuggestedQuery({ element })).toBe(
-    `ByRole("button", {name:/submit/})`
+  const results = getSuggestedQuery({ element });
+  expect(results.toString()).toBe(
+    `Role("button", {name:/submit/})`
   );
+
+  expect(results).toBe(expect.objectContaining({
+    queryName: "Role",
+    parameters: ["button", { name: /submit/ }]
+  }))
+
 });
 
 test("should recommend role on element without text", () => {
   renderIntoDocument(`<input type="checkbox" />`);
 
   const element = screen.getByRole("checkbox");
-  expect(getSuggestedQuery({ element })).toBe(`ByRole("checkbox")`);
+  expect(getSuggestedQuery({ element })).toBe(`Role("checkbox")`);
 });
 
 test("should recommend role when none present", () => {
@@ -33,7 +40,7 @@ test.skip("should recommend semantic role on element with role attribute", () =>
 
   screen.debug(screen.getByRole("link")); //🤔 maybe a gap in DTL here, but it appears that `link` is not returned when you use getByRole('link')
   const element = screen.getByText("foo");
-  expect(getSuggestedQuery({ element })).toBe(`ByRole("link", {name:/foo/})`);
+  expect(getSuggestedQuery({ element })).toBe(`Role("link", {name:/foo/})`);
 });
 
 test.todo("should recommend text");
