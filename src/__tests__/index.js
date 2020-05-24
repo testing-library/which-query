@@ -1,5 +1,13 @@
-import lib from '../'
+/**
+ * @jest-environment jsdom
+ */
+import {screen} from '@testing-library/dom'
+import {getSuggestedQuery} from '../'
+import {renderIntoDocument} from './helpers/test-utils'
 
-test('lib should be tested', () => {
-  expect(lib).toBeDefined()
+test('should recommend role on test id', () => {
+  renderIntoDocument(`<button data-testid="foo">submit</button>`)
+
+  const element = screen.getByTestId('foo') //omg the hypocrisy
+  expect(getSuggestedQuery({element})).toBe(`ByRole("button", {name:/submit/})`)
 })

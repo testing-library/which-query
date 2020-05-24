@@ -33,6 +33,7 @@
     "@babel/runtime": "^7.9.6"
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.5.7",
     "kcd-scripts": "^6.0.0"
   },
   "eslintConfig": {
