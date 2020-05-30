@@ -8,7 +8,7 @@
     src="https://raw.githubusercontent.com/testing-library/which-query/master/other/flamingo.png"
   />
 </a>
-<p>🦩 Which query should I use?</p>
+<p>🦩 Which query should I use: the chrome extension</p>
 </div>
 
 ---
