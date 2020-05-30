@@ -34,9 +34,7 @@ result, folks will jump to using escape hatches like `*ByTestId` or
 
 ## This solution
 
-This library aims to serve as the logic for finding a better query and giving
-hints/suggestions to developers during testing (opt in) as well as when using
-the [testing playground](http://testing-playground.com/).
+This chrome extension aims to enable developers to find a better query when writing tests. Right click on an element on any web page and it will allow you to find the suggested query for any testing-library environment that supports the dom.
 
 ## Table of Contents
 
@@ -57,16 +55,32 @@ the [testing playground](http://testing-playground.com/).
 
 ## Installation
 
-This module is distributed via [npm][npm] which is bundled with [node][node] and
-should be installed as one of your project's `devDependencies`:
+For now this is a manual install, will be on the chrome store soon.
 
+0. clone this repo
+
+```bash
+npm i
+npm run build
 ```
-npm install --save-dev @testing-library/which-query
-```
+
+1. in chrome navigate to chrome://extensions
+
+2. make sure developer mode is on
+
+3. Click "Load Unpacked"
+
+4. Browse to '/path/to/where/you/cloned'
+
+5. click select
 
 ## Usage
 
-// TODO
+    <img
+    alt="demo of which query extension"
+    src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif"
+
+/>
 
 ## Inspiration
 
