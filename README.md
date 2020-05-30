@@ -76,11 +76,9 @@ npm run build
 
 ## Usage
 
-    <img
-    alt="demo of which query extension"
-    src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif"
-
-/>
+<img
+ alt="demo of which query extension"
+ src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif" />
 
 ## Inspiration
 
