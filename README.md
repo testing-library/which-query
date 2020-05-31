@@ -8,7 +8,7 @@
     src="https://raw.githubusercontent.com/testing-library/which-query/master/other/flamingo.png"
   />
 </a>
-<p>🦩 Which query should I use?</p>
+<p>🦩 Which query should I use: the chrome extension</p>
 </div>
 
 ---
@@ -34,7 +34,7 @@ result, folks will jump to using escape hatches like `*ByTestId` or
 
 ## This solution
 
-This chrome extension aims to enable developers to find a better query when writing tests. Right click on an element on any web page and it will allow you to find the suggested query for any testing-library environment that supports the dom.
+This chrome extension aims to enable developers to find a better query when writing tests. Right click on an element on any web page and it will copy the best possible query for that element into your clipboard.  Then simply paste into your test code.
 
 ## Table of Contents
 
@@ -76,11 +76,9 @@ npm run build
 
 ## Usage
 
-    <img
-    alt="demo of which query extension"
-    src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif"
-
-/>
+<img
+ alt="demo of which query extension"
+ src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif" />
 
 ## Inspiration
 
