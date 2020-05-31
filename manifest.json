@@ -11,7 +11,7 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["js/background.js"],
+    "scripts": ["dist/background.js"],
     "persistent": false
   },
   "content_scripts": [
@@ -19,13 +19,14 @@
       "matches": ["<all_urls>"],
       "js": [
         "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js",
-        "js/contentScript.js"
+        "dist/contentScript.js"
       ]
     }
   ],
   "browser_action": {
     "default_icon": "icons/icon48.png"
   },
+  "devtools_page": "pages/devtools.html",
   "permissions": [
     "activeTab",
     "contextMenus",

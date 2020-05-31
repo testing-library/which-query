@@ -1,7 +1,17 @@
+const Bridge = require("crx-bridge").default;
+
+Bridge.onMessage(
+  "connect",
+  () =>
+    new Promise((res) => {
+      res("connected");
+    })
+);
+
 const contextMenuItem = {
   id: "whichQuery",
   title: "Testing Library",
-  contexts: ["all"], //"selection", "link", "editable", "image", "video"]
+  contexts: ["all"],
 };
 
 const variants = ["get", "getAll", "query", "queryAll", "find", "findAll"];
@@ -12,7 +22,7 @@ chrome.contextMenus.create(contextMenuItem, () => {
       id: variant,
       parentId: "whichQuery",
       title: `Copy as ${variant}By`,
-      contexts: ["all", "selection", "link", "editable", "image", "video"],
+      contexts: ["all"],
     });
   }
 });
