@@ -80,6 +80,10 @@ npm run build
  alt="demo of which query extension"
  src="https://raw.githubusercontent.com/testing-library/which-query/master/other/demo.gif" />
 
+[Use Testing Library in the browser console](https://youtu.be/g4i8k_Hue84)
+
+[Get a Query by inspecting elements in devtools](https://www.youtube.com/watch?v=bt8RGZB6Yyw)
+
 ## Inspiration
 
 [This tweet thread](https://twitter.com/benmonro/status/1264551204127780870?s=20)
