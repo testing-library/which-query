@@ -1,13 +1,5 @@
 const Bridge = require("crx-bridge").default;
 
-Bridge.onMessage(
-  "connect",
-  () =>
-    new Promise((res) => {
-      res("connected");
-    })
-);
-
 Bridge.onMessage("show-notification", ({ data: { notification } }) => {
   chrome.notifications.create(notification);
 });

@@ -5,6 +5,7 @@ module.exports = {
     background: "./src/background.js",
     contentScript: "./src/contentScript.js",
     devtools: "./src/devtools.js",
+    elementsPanel: "./src/elementsPanel.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

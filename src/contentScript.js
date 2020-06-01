@@ -3,11 +3,6 @@ const Bridge = require("crx-bridge").default;
 // eslint-disable-next-line no-unused-vars
 const { screen, getSuggestedQuery } = require("@testing-library/dom");
 
-Bridge.onMessage("connect", () => {
-  //needed to establish connection
-  return "connected";
-});
-
 let currentElement = null;
 
 document.addEventListener(
@@ -19,6 +14,13 @@ document.addEventListener(
   },
   true
 );
+
+Bridge.onMessage("run-query-in-console", ({ data: { query } }) => {
+  /* eslint-disable  */
+  console.log(query);
+  console.log(eval(query));
+  /* eslint-enable */
+});
 
 const CANT_COPY_NOTIFICATION = {
   type: "basic",
@@ -101,17 +103,21 @@ function getClosestQuery(element, variant, { doValidate = false } = {}) {
   return { suggestedQuery, ...validations };
 }
 
-function showElement(el) {
-  const { suggestedQuery, length, exactIndex } = getClosestQuery(el, "get", {
-    doValidate: true,
-  });
+function showElement(element) {
+  const { suggestedQuery, length, exactIndex } = getClosestQuery(
+    element,
+    "get",
+    {
+      doValidate: true,
+    }
+  );
   Bridge.sendMessage(
     "show-suggestion",
     {
       suggestedQuery: suggestedQuery.toString(),
       length,
       exactIndex,
-      element: el,
+      element,
     },
     "devtools"
   );
