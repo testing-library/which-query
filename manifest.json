@@ -15,7 +15,8 @@
     "persistent": false
   },
   "web_accessible_resources": [
-    "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
+    "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js",
+    "src/globals.js"
   ],
   "content_scripts": [
     {

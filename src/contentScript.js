@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((request) => {
   if (request.type == "getSuggestedQuery") {
     const { suggestedQuery } = getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
-      navigator.clipboard.writeText(suggestedQuery.toString()).then(
+      navigator.clipboard.writeText(`screen.${suggestedQuery.toString()}`).then(
         () => {},
         () => {
           // eslint-disable-next-line no-console
@@ -77,13 +77,21 @@ function showElement(el) {
 }
 
 window.showElement = showElement;
+function injectScript(scriptPath) {
+  return new Promise((resolve) => {
+    const scriptTag = document.createElement("script");
+    scriptTag.src = chrome.runtime.getURL(scriptPath);
 
-const scriptTag = document.createElement("script");
-scriptTag.src = chrome.runtime.getURL(
+    scriptTag.onload = function onload() {
+      resolve();
+      this.remove();
+    };
+    (document.head || document.documentElement).appendChild(scriptTag);
+  });
+}
+
+injectScript(
   "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
-);
-
-scriptTag.onload = function onload() {
-  this.remove();
-};
-(document.head || document.documentElement).appendChild(scriptTag);
+).then(() => {
+  injectScript("src/globals.js");
+});
