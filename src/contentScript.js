@@ -18,7 +18,7 @@ document.addEventListener(
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type == "getSuggestedQuery") {
-    const suggestedQuery = getClosestQuery(currentElement, request.variant);
+    const { suggestedQuery } = getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
       navigator.clipboard.writeText(suggestedQuery.toString()).then(
         () => {},
@@ -36,35 +36,54 @@ chrome.runtime.onMessage.addListener((request) => {
 });
 
 function getClosestQuery(element, variant) {
-  let query = null;
+  let suggestedQuery = null;
   let nextEl = element;
-  while (!query && nextEl !== document) {
-    query = window.TestingLibraryDom.getSuggestedQuery(nextEl, variant);
+  while (!suggestedQuery && nextEl !== document) {
+    suggestedQuery = window.TestingLibraryDom.getSuggestedQuery(
+      nextEl,
+      variant
+    );
+
     nextEl = nextEl.parentElement;
   }
 
-  return query;
+  // Why use javascript if you can't use eval from time to time.  Deal with it. 😎
+  // eslint-disable-next-line no-eval
+  const proposed = window.eval(
+    `window.TestingLibraryDom.screen.${suggestedQuery
+      .toString()
+      .replace("get", "queryAll")}`
+  );
+
+  const exactIndex = proposed.findIndex((el) => el === element);
+
+  const length = proposed.length;
+
+  return { suggestedQuery, length, exactIndex };
 }
 
-const variants = ["get", "getAll", "query", "queryAll", "find", "findAll"];
-
 function showElement(el) {
-  const suggestion = getClosestQuery(el, "get").toString();
-  const suggestedQueries = variants.map((variant) =>
-    suggestion.replace("get", variant)
+  const { suggestedQuery, length, exactIndex } = getClosestQuery(el, "get");
+  Bridge.sendMessage(
+    "show-suggestion",
+    {
+      suggestedQuery: suggestedQuery.toString(),
+      length,
+      exactIndex,
+      element: el,
+    },
+    "devtools"
   );
-  Bridge.sendMessage("show-el", { suggestedQueries }, "devtools");
 }
 
 window.showElement = showElement;
 
 const scriptTag = document.createElement("script");
-// TODO: add "script.js" to web_accessible_resources in manifest.json
 scriptTag.src = chrome.runtime.getURL(
   "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
 );
-// eslint-disable-next-line func-names
-scriptTag.onload = function () {
+
+scriptTag.onload = function onload() {
   this.remove();
 };
 (document.head || document.documentElement).appendChild(scriptTag);
