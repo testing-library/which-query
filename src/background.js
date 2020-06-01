@@ -8,6 +8,10 @@ Bridge.onMessage(
     })
 );
 
+Bridge.onMessage("show-notification", ({ data: { notification } }) => {
+  chrome.notifications.create(notification);
+});
+
 const contextMenuItem = {
   id: "whichQuery",
   title: "Testing Library",
@@ -28,9 +32,14 @@ chrome.contextMenus.create(contextMenuItem, () => {
 });
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.parentMenuItemId === "whichQuery") {
-    chrome.tabs.sendMessage(tab.id, {
-      type: "getSuggestedQuery",
-      variant: info.menuItemId,
+    chrome.windows.update(tab.windowId, { focused: true }, () => {
+      chrome.tabs.update(tab.id, { active: true }, () => {
+        chrome.tabs.sendMessage(tab.id, {
+          type: "getSuggestedQuery",
+          variant: info.menuItemId,
+        });
+      });
     });
+    // Set focus on tab
   }
 });

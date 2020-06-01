@@ -1,4 +1,8 @@
 const Bridge = require("crx-bridge").default;
+// screen is used by the eval below.  😎
+// eslint-disable-next-line no-unused-vars
+const { screen, getSuggestedQuery } = require("@testing-library/dom");
+
 Bridge.onMessage("connect", () => {
   //needed to establish connection
   return "connected";
@@ -16,54 +20,91 @@ document.addEventListener(
   true
 );
 
+const CANT_COPY_NOTIFICATION = {
+  type: "basic",
+  iconUrl: "icons/icon64.png",
+  title: "Can't Copy Query",
+  message: "Check browser console for details.",
+  contextMessage: "Are you are debugging?",
+};
+
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type == "getSuggestedQuery") {
     const { suggestedQuery } = getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
-      navigator.clipboard.writeText(`screen.${suggestedQuery.toString()}`).then(
-        () => {},
+      const queryToCopy = `screen.${suggestedQuery.toString()}`;
+      navigator.clipboard.writeText(queryToCopy).then(
         () => {
-          // eslint-disable-next-line no-console
-          console.log(suggestedQuery.toString());
-          // eslint-disable-next-line no-console
-          console.warn(
-            "Can't copy query to clipboard when focus is not in the browser."
+          // TODO: add option to toggle this
+          Bridge.sendMessage(
+            "show-notification",
+            {
+              notification: {
+                type: "basic",
+                iconUrl: "icons/icon64.png",
+                title: "Copied Query",
+                message: queryToCopy,
+              },
+            },
+            "background"
           );
+        },
+        (err) => {
+          /* eslint-disable no-console */
+          Bridge.sendMessage(
+            "show-notification",
+            { notification: CANT_COPY_NOTIFICATION },
+            "background"
+          );
+
+          // TODO: figure this crap out https://github.com/testing-library/which-query/issues/9
+          console.warn(
+            `
+Can't copy query to clipboard when focus is not in the browser.
+Click in the page and be sure devtools does not have focus when using Testing Library copy menus.
+Know how to fix this issue? Pull Requests welcome: https://github.com/testing-library/which-query/issues/9
+`,
+            err
+          );
+          console.log("Here is the query you tried to copy:");
+          console.log(queryToCopy);
+          /* eslint-enable no-console */
         }
       );
     }
   }
 });
 
-function getClosestQuery(element, variant) {
+function getClosestQuery(element, variant, { doValidate = false } = {}) {
   let suggestedQuery = null;
   let nextEl = element;
   while (!suggestedQuery && nextEl !== document) {
-    suggestedQuery = window.TestingLibraryDom.getSuggestedQuery(
-      nextEl,
-      variant
-    );
+    suggestedQuery = getSuggestedQuery(nextEl, variant);
 
     nextEl = nextEl.parentElement;
   }
 
-  // Why use javascript if you can't use eval from time to time.  Deal with it. 😎
-  // eslint-disable-next-line no-eval
-  const proposed = window.eval(
-    `window.TestingLibraryDom.screen.${suggestedQuery
-      .toString()
-      .replace("get", "queryAll")}`
-  );
+  let validations = {};
+  if (doValidate) {
+    // Why use javascript if you can't use eval from time to time.  Deal with it. 😎
+    // eslint-disable-next-line no-eval
+    const proposed = eval(
+      `screen.${suggestedQuery.toString().replace("get", "queryAll")}`
+    );
 
-  const exactIndex = proposed.findIndex((el) => el === element);
+    const exactIndex = proposed.findIndex((el) => el === element);
 
-  const length = proposed.length;
+    const length = proposed.length;
+    validations = { exactIndex, length };
+  }
 
-  return { suggestedQuery, length, exactIndex };
+  return { suggestedQuery, ...validations };
 }
 
 function showElement(el) {
-  const { suggestedQuery, length, exactIndex } = getClosestQuery(el, "get");
+  const { suggestedQuery, length, exactIndex } = getClosestQuery(el, "get", {
+    doValidate: true,
+  });
   Bridge.sendMessage(
     "show-suggestion",
     {

@@ -35,6 +35,7 @@
     "activeTab",
     "contextMenus",
     "clipboardWrite",
-    "clipboardRead"
+    "clipboardRead",
+    "notifications"
   ]
 }
