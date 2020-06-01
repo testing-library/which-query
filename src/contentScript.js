@@ -57,3 +57,14 @@ function showElement(el) {
 }
 
 window.showElement = showElement;
+
+const scriptTag = document.createElement("script");
+// TODO: add "script.js" to web_accessible_resources in manifest.json
+scriptTag.src = chrome.runtime.getURL(
+  "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
+);
+// eslint-disable-next-line func-names
+scriptTag.onload = function () {
+  this.remove();
+};
+(document.head || document.documentElement).appendChild(scriptTag);

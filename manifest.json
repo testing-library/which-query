@@ -14,6 +14,9 @@
     "scripts": ["dist/background.js"],
     "persistent": false
   },
+  "web_accessible_resources": [
+    "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
