@@ -7,11 +7,11 @@
 
 // main();
 
-chrome.devtools.panels.create(
-  "Which Query?",
-  "icons/icon64.png",
-  "/pages/panel.html"
-);
+// chrome.devtools.panels.create(
+//   "Which Query?",
+//   "icons/icon64.png",
+//   "/pages/panel.html"
+// );
 
 chrome.devtools.panels.elements.createSidebarPane("Which Query?", (sidebar) => {
   sidebar.setPage("pages/elements-panel.html");
