@@ -22,57 +22,23 @@ Bridge.onMessage("run-query-in-console", ({ data: { query } }) => {
   /* eslint-enable */
 });
 
-const CANT_COPY_NOTIFICATION = {
-  type: "basic",
-  iconUrl: "icons/icon64.png",
-  title: "Can't Copy Query",
-  message: "Check browser console for details.",
-  contextMessage: "Are you are debugging?",
-};
-
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type == "getSuggestedQuery") {
     const { suggestedQuery } = getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
       const queryToCopy = `screen.${suggestedQuery.toString()}`;
-      navigator.clipboard.writeText(queryToCopy).then(
-        () => {
-          // TODO: add option to toggle this
-          Bridge.sendMessage(
-            "show-notification",
-            {
-              notification: {
-                type: "basic",
-                iconUrl: "icons/icon64.png",
-                title: "Copied Query",
-                message: queryToCopy,
-              },
-            },
-            "background"
-          );
-        },
-        (err) => {
-          /* eslint-disable no-console */
-          Bridge.sendMessage(
-            "show-notification",
-            { notification: CANT_COPY_NOTIFICATION },
-            "background"
-          );
+      const currentEl = document.activeElement;
 
-          // TODO: figure this crap out https://github.com/testing-library/which-query/issues/9
-          console.warn(
-            `
-Can't copy query to clipboard when focus is not in the browser.
-Click in the page and be sure devtools does not have focus when using Testing Library copy menus.
-Know how to fix this issue? Pull Requests welcome: https://github.com/testing-library/which-query/issues/9
-`,
-            err
-          );
-          console.log("Here is the query you tried to copy:");
-          console.log(queryToCopy);
-          /* eslint-enable no-console */
-        }
-      );
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "text";
+      hiddenInput.value = queryToCopy;
+      document.body.appendChild(hiddenInput);
+      hiddenInput.select();
+      hiddenInput.focus();
+
+      document.execCommand("copy");
+      hiddenInput.remove();
+      currentEl.focus();
     }
   }
 });
@@ -131,7 +97,7 @@ function injectScript(scriptPath) {
 
     scriptTag.onload = function onload() {
       resolve();
-      this.remove();
+      // this.remove();
     };
     (document.head || document.documentElement).appendChild(scriptTag);
   });
