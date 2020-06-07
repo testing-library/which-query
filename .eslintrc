@@ -1,6 +1,6 @@
 {
     "extends": "./node_modules/kcd-scripts/eslint.js",
-
+    "ignorePatterns":["lib/*"],
     "env":{
         "webextensions": true
     }

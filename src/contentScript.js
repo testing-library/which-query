@@ -46,47 +46,51 @@ chrome.runtime.onMessage.addListener((request) => {
 function getClosestQuery(element, variant, { doValidate = false } = {}) {
   let suggestedQuery = null;
   let nextEl = element;
-  while (!suggestedQuery && nextEl !== document) {
+  while (!suggestedQuery && nextEl !== document.body) {
     suggestedQuery = getSuggestedQuery(nextEl, variant);
 
     nextEl = nextEl.parentElement;
   }
 
-  let validations = {};
-  if (doValidate) {
-    // Why use javascript if you can't use eval from time to time.  Deal with it. 😎
-    // eslint-disable-next-line no-eval
-    const proposed = eval(
-      `screen.${suggestedQuery.toString().replace("get", "queryAll")}`
-    );
+  if (suggestedQuery) {
+    let validations = {};
+    if (doValidate) {
+      // Why use javascript if you can't use eval from time to time.  Deal with it. 😎
+      // eslint-disable-next-line no-eval
+      const proposed = eval(
+        `screen.${suggestedQuery.toString().replace("get", "queryAll")}`
+      );
 
-    const exactIndex = proposed.findIndex((el) => el === element);
+      const exactIndex = proposed.findIndex((el) => el === element);
 
-    const length = proposed.length;
-    validations = { exactIndex, length };
+      const length = proposed.length;
+      validations = { exactIndex, length };
+    }
+
+    return { suggestedQuery, ...validations };
   }
-
-  return { suggestedQuery, ...validations };
+  return null;
 }
 
 function showElement(element) {
-  const { suggestedQuery, length, exactIndex } = getClosestQuery(
-    element,
-    "get",
-    {
-      doValidate: true,
-    }
-  );
-  Bridge.sendMessage(
-    "show-suggestion",
-    {
-      suggestedQuery: suggestedQuery.toString(),
-      length,
-      exactIndex,
-      element,
-    },
-    "devtools"
-  );
+  const closestQuery = getClosestQuery(element, "get", {
+    doValidate: true,
+  });
+  if (closestQuery) {
+    const { suggestedQuery, length, exactIndex } = closestQuery;
+
+    Bridge.sendMessage(
+      "show-suggestion",
+      {
+        suggestedQuery: suggestedQuery.toString(),
+        length,
+        exactIndex,
+      },
+      "devtools"
+    );
+  } else {
+    Bridge.sendMessage("show-no-suggestion", {}, "devtools");
+  }
 }
 
 window.showElement = showElement;

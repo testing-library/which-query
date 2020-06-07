@@ -30,7 +30,7 @@ chrome.devtools.panels.elements.createSidebarPane("Which Query?", (sidebar) => {
   //     //   sidebar.setObject(
   //     //     { suggestedQuery },
   //     //     isExact
-  //     //       ? "This query will get this precise element"
+  //     //       ? "This query will get this fprecise element"
   //     //       : "{!} Closest available query, try improving a11y of this element.."
   //     //   );
   //     }

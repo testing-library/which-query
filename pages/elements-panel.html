@@ -1,71 +1,28 @@
 <html>
     <head>
-        <link href="node_modules/tachyons/css/tachyons.min.css">
+        <link rel="stylesheet" href="css/highlight/styles/atom-one-dark.css">
+        <link rel="stylesheet" type="text/css" href="css/tachyons.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
         <script src="/dist/elementsPanel.js" ></script>
        
     </head>
-    <style>
-        blockquote.good {
-            text-rendering: optimizeLegibility;
-            text-align: left;
-            box-sizing: border-box;
-            border: 0;
-            font: inherit;
-            vertical-align: baseline;
-            color: #6a737d;
-            font-size: 16px;
-            margin: 0 0 16px;
-            background-color: rgba(0,180,0,.1);
-            border-left: 8px solid #005500;
-            padding: 15px 30px 15px 15px;
-        }
-        blockquote.warn {
-            text-rendering: optimizeLegibility;
-            text-align: left;
-            box-sizing: border-box;
-            border: 0;
-            font: inherit;
-            vertical-align: baseline;
-            color: #6a737d;
-            font-size: 16px;
-            margin: 0 0 16px;
-            background-color: rgba(255,229,100,.3);
-            border-left: 8px solid #ffe564;
-            padding: 15px 30px 15px 15px;
-        }
-        code {
-            text-rendering: optimizeLegibility;
-            box-sizing: border-box;
-            font: inherit;
-            vertical-align: baseline;
-            border-radius: 3px;
-            border: 0;
-            margin: 0;
-            overflow: visible;
-            display: block;
-            overflow-x: auto;
-            background: #F0F0F0;
-            color: #444;
-            padding: 1.25rem 1.5rem;
-            font-size: 13px;
-            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-            text-align: left;
-            white-space: pre;
-            word-spacing: normal;
-            word-break: normal;
-            word-wrap: normal;
-            line-height: 1.5;
-            tab-size: 4;
-            hyphens: none;
-        }
-    </style>
-<body>
-    <h1>Suggested Query</h1>
-    <blockquote id="message"></blockquote>
-    <pre>
-        <code id="query-code" >
-    </code>
-    </pre>
-    <button>run in console</button>
+
+<body class="bg-light-gray">
+
+
+    <article class="center mw5 mw6-ns br3 hidden ba b--black-10 mv4">
+        <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">Suggested Query</h1>
+        <div class="pa3 bt b--black-10">
+            <blockquote id="message"></blockquote>
+            <div id="query-view">
+                <pre>
+                    <code class="javascript" id="query-code" >
+                    </code>
+                </pre>
+                <button>run in console</button>
+            </div>
+        </div>
+      </article>
+
 </body>
 </html>

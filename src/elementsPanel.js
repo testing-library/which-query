@@ -1,8 +1,10 @@
 const Bridge = require("crx-bridge").default;
-
+const beautify = require("js-beautify").js;
+const hljs = require("../lib/highlight.pack");
 Bridge.onMessage(
   "show-suggestion",
   ({ data: { suggestedQuery, exactIndex, length } }) => {
+    document.querySelector("#query-view").style = "display:inline";
     const isExact = exactIndex >= 0;
     if (length > 1) {
       suggestedQuery = suggestedQuery.replace("get", "getAll");
@@ -16,24 +18,24 @@ Bridge.onMessage(
     message.innerHTML = isExact
       ? "<span style='font-size:20px;'>&#9989;</span> This query will get this precise element"
       : "<span style='font-size:20px;'>&#9888;</span> This is the closest available query, try improving accessibility of this element.";
-    document.querySelector(
-      "#query-code"
-    ).innerText = `screen.${suggestedQuery}`;
-    //   document.write(suggestedQuery)
 
-    //   sidebar.setObject(
-    //     { suggestedQuery },
-    // isExact
-    //   ? "This query will get this precise element"
-    //   : "{!} Closest available query, try improving a11y of this element.."
-    //   );
+    const codeBlock = document.querySelector("#query-code");
+
+    codeBlock.innerText = beautify(`screen.${suggestedQuery}`);
+
+    hljs.highlightBlock(codeBlock);
   }
 );
 
+Bridge.onMessage("show-no-suggestion", () => {
+  document.querySelector("#query-view").style = "display:none";
+  const message = document.querySelector("#message");
+  message.className = "warn";
+  message.innerHTML =
+    "<span style='font-size:20px;'>&#129300;</span> That element doesn't resolve to a query.";
+});
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Handler when the DOM is fully loaded
-  // console.log("Hereeeee")
-  // document.write("Foo")
   document.querySelector("button").addEventListener("click", () => {
     Bridge.sendMessage(
       "run-query-in-console",
@@ -42,3 +44,5 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 });
+
+// hljs.initHighlightingOnLoad();
