@@ -2,6 +2,7 @@ const Bridge = require("crx-bridge").default;
 const prettier = require("prettier/standalone");
 const babelParser = require("prettier/parser-babel");
 const hljs = require("../lib/highlight.pack");
+
 Bridge.onMessage(
   "show-suggestion",
   ({ data: { suggestedQuery, exactIndex, length } }) => {

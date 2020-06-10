@@ -107,8 +107,4 @@ function injectScript(scriptPath) {
   });
 }
 
-injectScript(
-  "node_modules/@testing-library/dom/dist/@testing-library/dom.umd.min.js"
-).then(() => {
-  injectScript("src/globals.js");
-});
+injectScript("dist/globals.js");
