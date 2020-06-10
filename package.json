@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "@testing-library/dom": "^7.10.1",
+    "@testing-library/dom": "^7.11.0",
     "crx-bridge": "^2.1.0",
     "js-beautify": "^1.11.0",
     "tachyons": "^4.12.0"

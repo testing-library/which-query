@@ -45,4 +45,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// hljs.initHighlightingOnLoad();
+hljs.initHighlightingOnLoad();
