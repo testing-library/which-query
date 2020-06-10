@@ -1,5 +1,6 @@
 const Bridge = require("crx-bridge").default;
-const beautify = require("js-beautify").js;
+const prettier = require("prettier/standalone");
+const babelParser = require("prettier/parser-babel");
 const hljs = require("../lib/highlight.pack");
 Bridge.onMessage(
   "show-suggestion",
@@ -21,7 +22,10 @@ Bridge.onMessage(
 
     const codeBlock = document.querySelector("#query-code");
 
-    codeBlock.innerText = beautify(`screen.${suggestedQuery}`);
+    codeBlock.innerText = prettier.format(`screen.${suggestedQuery}`, {
+      parser: "babel",
+      plugins: [babelParser],
+    });
 
     hljs.highlightBlock(codeBlock);
   }
