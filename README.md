@@ -55,13 +55,27 @@ This chrome extension aims to enable developers to find a better query when writ
 
 ## Installation
 
-For now this is a manual install, will be on the chrome store soon.
+This will be in the chrome store soon.
+
+### For now
+
+1. Download a release from the releases page.
+2. Unzip the file 
+3. make sure developer mode is on
+
+4. Click "Load Unpacked"
+
+5. Browse to '/path/to/where/you/unzipped
+
+6. click select
+
+### From source:
 
 0. clone this repo
 
 ```bash
 npm i
-npm run build
+npm run build:chrome:dev
 ```
 
 1. in chrome navigate to chrome://extensions
@@ -70,7 +84,7 @@ npm run build
 
 3. Click "Load Unpacked"
 
-4. Browse to '/path/to/where/you/cloned'
+4. Browse to '/path/to/where/you/cloned/chrome/build/unpacked'
 
 5. click select
 
