@@ -57,9 +57,9 @@ This chrome extension aims to enable developers to find a better query when writ
 
 This will be in the chrome store soon.
 
-### For now
+### From github releases
 
-1. Download a release from the releases page.
+1. Download a release from the [releases](https://github.com/testing-library/which-query/releases) page.
 2. Unzip the file 
 3. make sure developer mode is on
 
@@ -71,22 +71,24 @@ This will be in the chrome store soon.
 
 ### From source:
 
-0. clone this repo
+1. clone & install:
 
 ```bash
+git clone git@github.com:testing-library/which-query.git
+cd which-query
 npm i
 npm run build:chrome:dev
 ```
 
-1. in chrome navigate to chrome://extensions
+2. in chrome navigate to chrome://extensions
 
-2. make sure developer mode is on
+3. make sure developer mode is on
 
-3. Click "Load Unpacked"
+4. Click "Load Unpacked"
 
-4. Browse to '/path/to/where/you/cloned/chrome/build/unpacked'
+5. Browse to '/path/to/where/you/cloned/chrome/build/unpacked'
 
-5. click select
+6. click select
 
 ## Usage
 
