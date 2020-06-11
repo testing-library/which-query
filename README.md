@@ -55,9 +55,9 @@ This chrome extension aims to enable developers to find a better query when writ
 
 ## Installation
 
-This will be in the chrome store soon.
+[Install from the chrome web store](https://chrome.google.com/webstore/detail/testing-library-which-que/olmmagdolfehlpjmbkmondggbebeimoh)
 
-### From github releases
+### From github releases (for previous versions)
 
 1. Download a release from the [releases](https://github.com/testing-library/which-query/releases) page.
 2. Unzip the file 
