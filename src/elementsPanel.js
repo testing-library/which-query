@@ -9,7 +9,7 @@ Bridge.onMessage(
     document.querySelector("#query-view").style = "display:inline";
     const isExact = exactIndex >= 0;
     if (length > 1) {
-      suggestedQuery = suggestedQuery.replace("get", "getAll");
+      suggestedQuery = suggestedQuery.replace(/^get/, "getAll");
 
       if (isExact) {
         suggestedQuery += `[${exactIndex}]`;

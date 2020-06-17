@@ -2,6 +2,7 @@ const Bridge = require("crx-bridge").default;
 // screen is used by the eval below.  😎
 // eslint-disable-next-line no-unused-vars
 const { screen, getSuggestedQuery } = require("@testing-library/dom");
+const { getSuggestionFor } = require("./queryResolver");
 
 let currentElement = null;
 
@@ -24,7 +25,7 @@ Bridge.onMessage("run-query-in-console", ({ data: { query } }) => {
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type == "getSuggestedQuery") {
-    const { suggestedQuery } = getClosestQuery(currentElement, request.variant);
+    const suggestedQuery = getSuggestionFor(currentElement, request.variant); //getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
       const queryToCopy = `screen.${suggestedQuery.toString()}`;
       const currentEl = document.activeElement;
@@ -101,7 +102,7 @@ function injectScript(scriptPath) {
 
     scriptTag.onload = function onload() {
       resolve();
-      // this.remove();
+      //      this.remove();
     };
     (document.head || document.documentElement).appendChild(scriptTag);
   });
