@@ -7,7 +7,7 @@ const { readFileSync, writeFileSync, createWriteStream } = require("fs");
 const { join } = require("path");
 const { copy, ensureDir, move, remove } = require("fs-extra");
 const archiver = require("archiver");
-const { getGitCommit } = require("./git");
+// const { getGitCommit } = require("./git");
 
 // These files are copied along with Webpack-bundled files
 // to produce the final web extension
@@ -53,7 +53,7 @@ const build = async (tempPath, manifestPath) => {
     STATIC_FILES.map((file) => copy(join(__dirname, file), join(zipPath, file)))
   );
 
-  const commit = getGitCommit();
+  // const commit = getGitCommit();
   const dateString = new Date().toLocaleDateString();
   const manifest = JSON.parse(readFileSync(copiedManifestPath).toString());
   const versionDateString = `${manifest.version} (${dateString})`;
@@ -61,7 +61,7 @@ const build = async (tempPath, manifestPath) => {
     // eslint-disable-next-line babel/camelcase
     manifest.version_name = versionDateString;
   }
-  manifest.description += `\n\nCreated from revision ${commit} on ${dateString}.`;
+  // manifest.description += `\n\nCreated from revision ${commit} on ${dateString}.`;
 
   writeFileSync(copiedManifestPath, JSON.stringify(manifest, null, 2));
 

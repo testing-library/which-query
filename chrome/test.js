@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const chromeLaunch = require("chrome-launch");
 const { resolve } = require("path");
+const chromeLaunch = require("chrome-launch");
 
 const EXTENSION_PATH = resolve("./chrome/build/unpacked");
 const START_URL = "https://facebook.github.io/react/";

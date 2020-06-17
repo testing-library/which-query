@@ -1,6 +1,6 @@
 {
   "name": "Testing Library: which query",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Find the suggested query to use in your tests",
   "homepage_url": "https://github.com/testing-library/which-query",
