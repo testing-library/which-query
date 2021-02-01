@@ -24,7 +24,7 @@ Bridge.onMessage("run-query-in-console", ({ data: { query } }) => {
 });
 
 chrome.runtime.onMessage.addListener((request) => {
-  if (request.type == "getSuggestedQuery") {
+  if (request.type == "getSuggestedQuery" && currentElement) {
     const suggestedQuery = getSuggestionFor(currentElement, request.variant); //getClosestQuery(currentElement, request.variant);
     if (suggestedQuery) {
       const queryToCopy = `screen.${suggestedQuery.toString()}`;
@@ -40,6 +40,9 @@ chrome.runtime.onMessage.addListener((request) => {
       document.execCommand("copy");
       hiddenInput.remove();
       currentEl.focus();
+
+      // Clear the currentElement since we run on multiple frames
+      currentElement = null;
     }
   }
 });

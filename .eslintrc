@@ -3,5 +3,8 @@
     "ignorePatterns":["lib/*"],
     "env":{
         "webextensions": true
+    },
+    "rules": {
+        "testing-library/no-dom-import": "off"
     }
 }
