@@ -1,6 +1,6 @@
 # ⚠️ Deprecation notice ⚠️
 
-This repository has been deprecated in favor of http://github.com/testing-library/testing-playground. Testing Playground contains the functionality provided here and can be downloaded through [chrome web store](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano).
+This repository has been deprecated in favor of [Testing Playground](http://github.com/testing-library/testing-playground), which contains the functionality provided here and can be downloaded through the [Chrome Web Store](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano).
 
 
 <div align="center">
