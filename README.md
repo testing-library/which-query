@@ -1,3 +1,8 @@
+# ⚠️ Deprecation notice ⚠️
+
+This repository has been deprecated in favor of http://github.com/testing-library/testing-playground. Testing Playground contains the functionality provided here and can be downloaded through [chrome web store](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano).
+
+
 <div align="center">
 <h1>@testing-library/which-query</h1>
 <a href="https://www.joypixels.com/profiles/emoji/flamingo">
